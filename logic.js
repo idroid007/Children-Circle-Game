@@ -62,15 +62,42 @@ class Game{
       container.appendChild(figure);
     }
    static findWinner(n,k){
-    
+    //calling create players function to get players
     let childrens=Game.createPlayers(n);
-    let index=0;
+    // pointer is pointing the element which needs to be removed from an childrens array
+    let pointer=0;
+    /*
+      The core logic is in While loop
+      complexity of the logic Time: O(n) (n=number of child in childrens)
+                          
+      In our array childrens, we are removing children 1 by 1 on the basis of
+      pointer. so this loop will execute (n-1) times.
+
+    */
     while(childrens.length>1){
-        index = (index + k - 1) % childrens.length;
-        let child  = childrens[index];
+        /*
+         explanation of pointer
+         if n=5 & k=2
+         then
+         [p1,p2,p3,p4,p5] in childrens & lendth = 5
+         so in first iteration, kth child needs to be removed so
+         in pointer we will get 1.
+         pointer(1) index in childrens array i.e 2nd element we are slicing from array.
+
+         In 2nd iteration, we are left with childrens [p1,p3,p4,p5] & length =4
+         pointer pointing 1 index element and formular will run again
+         pointer = 2 & we are slicing 3rd element from sliced array.
+
+         In 3rd iteration, we are left with [p1,p3,p5] & length = 3
+         this login will execute unless 1 element left in childrens array and the last 
+         element will be the winner
+
+        */
+        pointer = (pointer + k - 1) % childrens.length;
+        let child  = childrens[pointer];
         Game.displaySequence(child);
-        console.log("child out is:"+child.id);
-        childrens.splice(index,1);
+        
+        childrens.splice(pointer,1);
     }
       Game.displayWinner(childrens[0])
     }
@@ -81,18 +108,21 @@ let form = document.forms.game;
 
   form.onsubmit=(e)=>{
   e.preventDefault();
-  //converting string to number
+
+  //converting input values from string to number
   let n=form.n.value*1;
   let k = form.k.value*1;
 
-  //validation
-  if(n!="" && !isNaN(n) && !isNaN(k)){
+  //validation - checking input values are number and n & k !=0
+  if(n!="" && !isNaN(n) && !isNaN(k) && n!==0 &&k!==0){
     //calling game logic
       Game.findWinner(form.n.value*1,form.k.value*1);
   }else{
     alert("Validation error")
   }
-form.style.display="none";
+
+
+   form.style.display="none";
   }
 
 
