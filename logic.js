@@ -1,31 +1,109 @@
- class Game{
-     static  findWinner(n,k){
-          let childrens= Game.fillChildrens(n);
-        let length  =  childrens.length-1;
-        let pointer =0;
-      let counter =0;
-        let start = childrens[k];
-          while( length !==1){
-              pointer= (pointer+k)%length;
-              console.log(pointer)
-            let removed= childrens.splice(pointer,1);
-            console.log("first children out is"+removed);
-              console.log(removed)
-             length=childrens.length-1;
-           
-          }
-     }
+class Person{
+  constructor(id,name){
+      this.id = id
+      this.name=name;
+  }
+}
+class Game{
+  //insert players to array
+    createPlayers(n){
+        let players=[];
+        for(let i=1;i<=n;i++){
+            players.push(new Person(i,"player"+i))
+        }
+        this.displayPlayers(players)
+        return players;
+    }
+    displaySequence(player){
+      
+      let container = document.querySelector("#sequence")
+      let figure = document.createElement("figure");
+      let img = document.createElement("img");
+      img.setAttribute("src","child.png");
+      let figcaption = document.createElement("figcaption");
+      figcaption.appendChild(document.createTextNode(player.name))
+      figure.appendChild(img);
+      figure.appendChild(figcaption);
+      
+      container.appendChild(figure);
+    }
+    displayPlayers(players){
+      let container = document.querySelector("#players");
+      let h1 = document.createElement("H1");
+      h1.appendChild(document.createTextNode("Players"))
+      container.appendChild(h1);
+      for(let player of players){
+      let figure = document.createElement("figure");
+      let img = document.createElement("IMG");
+      img.setAttribute("src","child.png");
+      let figcaption = document.createElement("figcaption");
+      figcaption.appendChild(document.createTextNode(player.name))
+      figure.appendChild(img);
+      figure.appendChild(figcaption);
+      container.appendChild(figure);
+      }
+      let sequence = document.querySelector("#sequence");
+      let h1_sequence = document.createElement("h1");
+        h1_sequence.appendChild(document.createTextNode("Sequence"));
+        sequence.appendChild(h1_sequence);
+    }
+    displayWinner(player){
+      let container = document.querySelector("#winner");
+      let h1 = document.createElement("h1");
+      h1.appendChild(document.createTextNode("Winner"));
+      container.appendChild(h1);
+      let figure = document.createElement("figure");
+      let img = document.createElement("img");
+      img.setAttribute("src","child.png");
+      let figcaption = document.createElement("figcaption");
+      figcaption.appendChild(document.createTextNode(player.name))
+      figure.appendChild(img);
+      figure.appendChild(figcaption);
+      container.appendChild(figure);
+    }
+    findWinner(n,k){
+    
+    let childrens=this.createPlayers(n);
+    let index=0;
+    while(childrens.length>1){
+        index = (index + k - 1) % childrens.length;
+        let child  = childrens[index];
+        this.displaySequence(child);
+        console.log("child out is:"+child.id);
+        childrens.splice(index,1);
+    }
+      this.displayWinner(childrens[0])
+    }
+}
 
-     
-     static fillChildrens(n){
-         let childrens = [];
-       for(let i=1;i<=n;i++){
-         childrens[i]=i
-       }
-     return childrens;
-     }
+//Event For inputs
+let form = document.forms.game;
 
-   
- }
- 
- Game.findWinner(5,2)
+  form.onsubmit=(e)=>{
+  e.preventDefault();
+  //converting string to number
+  let n=form.n.value*1;
+  let k = form.k.value*1;
+
+  //validation
+  if(n!="" && !isNaN(n) && !isNaN(k)){
+    //calling game logic
+    new Game().findWinner(form.n.value*1,form.k.value*1);
+  }else{
+    alert("Validation error")
+  }
+form.style.display="none";
+  }
+
+
+/*
+Core Logic
+*/
+/*
+ while(childrens.length>1){
+      index = (index + k - 1) % childrens.length;
+      let child  = childrens[index];
+      console.log("child out is:"+child.id);
+      childrens.splice(index,1);
+  }
+  */

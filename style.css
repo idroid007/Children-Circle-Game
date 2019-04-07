@@ -1,0 +1,67 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+div.container{
+    padding: 20px;
+}
+form{
+    width: 30%;
+    margin: 0 auto;
+    border: 2px solid #e3e3e3;
+   padding: 20px;
+   text-align: center;
+}
+form input{
+   display: block;
+   width: 100%;
+   margin-bottom:15px;
+   padding: 5px;
+   border: 0;
+   outline: 0;
+   border-bottom:2px solid dodgerblue;
+}
+form button{
+    padding:5px 10px;
+    border: 2px solid dodgerblue;
+    background: none;
+    cursor: pointer;
+}
+figure{
+    display: inline-block;
+    border:2px solid #e3e3e3;
+    float: left;
+   text-align: center;
+   padding: 5px;
+    margin:10px;
+}
+
+#players , #sequence, #winner{
+    clear: both;
+}
+#sequence{
+    clear:both;
+}
+figure img{
+    width: 100px;
+    height:100px;
+
+}
+
+@keyframes fadeIn {
+   
+    100% {opacity: 1;}
+  }
+
+  form{
+      opacity: 0;
+    animation: fadeIn 0.5s ease-in 0.5s forwards ;
+  }
+
+  #winner figure{
+      opacity: 0;
+    animation: fadeIn 0.5s ease-in 0.5s forwards ;
+  }
