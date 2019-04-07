@@ -6,15 +6,15 @@ class Person{
 }
 class Game{
   //insert players to array
-    createPlayers(n){
+   static createPlayers(n){
         let players=[];
         for(let i=1;i<=n;i++){
             players.push(new Person(i,"player"+i))
         }
-        this.displayPlayers(players)
+        Game.displayPlayers(players)
         return players;
     }
-    displaySequence(player){
+   static displaySequence(player){
       
       let container = document.querySelector("#sequence")
       let figure = document.createElement("figure");
@@ -27,7 +27,7 @@ class Game{
       
       container.appendChild(figure);
     }
-    displayPlayers(players){
+    static displayPlayers(players){
       let container = document.querySelector("#players");
       let h1 = document.createElement("H1");
       h1.appendChild(document.createTextNode("Players"))
@@ -47,7 +47,7 @@ class Game{
         h1_sequence.appendChild(document.createTextNode("Sequence"));
         sequence.appendChild(h1_sequence);
     }
-    displayWinner(player){
+   static displayWinner(player){
       let container = document.querySelector("#winner");
       let h1 = document.createElement("h1");
       h1.appendChild(document.createTextNode("Winner"));
@@ -61,18 +61,18 @@ class Game{
       figure.appendChild(figcaption);
       container.appendChild(figure);
     }
-    findWinner(n,k){
+   static findWinner(n,k){
     
-    let childrens=this.createPlayers(n);
+    let childrens=Game.createPlayers(n);
     let index=0;
     while(childrens.length>1){
         index = (index + k - 1) % childrens.length;
         let child  = childrens[index];
-        this.displaySequence(child);
+        Game.displaySequence(child);
         console.log("child out is:"+child.id);
         childrens.splice(index,1);
     }
-      this.displayWinner(childrens[0])
+      Game.displayWinner(childrens[0])
     }
 }
 
@@ -88,7 +88,7 @@ let form = document.forms.game;
   //validation
   if(n!="" && !isNaN(n) && !isNaN(k)){
     //calling game logic
-    new Game().findWinner(form.n.value*1,form.k.value*1);
+      Game.findWinner(form.n.value*1,form.k.value*1);
   }else{
     alert("Validation error")
   }
