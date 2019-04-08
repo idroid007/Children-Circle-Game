@@ -5,6 +5,6 @@
 clone
 open index.html
 play
-s
+
 ```
 
