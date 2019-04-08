@@ -1,6 +1,6 @@
 
 
-let src="child.png";
+let src="resources/child.png";
 let form = document.forms.game;
 class Person{
   constructor(id,name){
