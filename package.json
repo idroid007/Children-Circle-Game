@@ -1,0 +1,26 @@
+{
+  "name": "assignment",
+  "version": "1.0.0",
+  "description": "```\r clone\r open index.html\r play\r ```",
+  "main": "logic.js",
+  "dependencies": {
+    "jest": "^24.7.1"
+  },
+  "devDependencies": {
+    "jest": "~24.7.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idroid007/Children-Circle-Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idroid007/Children-Circle-Game/issues"
+  },
+  "homepage": "https://github.com/idroid007/Children-Circle-Game#readme"
+}
